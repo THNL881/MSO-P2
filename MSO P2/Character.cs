@@ -20,6 +20,10 @@ namespace MSO_P2
             }
         }
 
+        public Point getPosition(){
+            return position;
+        }
+
     }
 
     public struct Direction
