@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace MSO_P2
 {
-    internal interface ICommand
+    public interface ICommand
     {
+        public void Execute(Character c);
+    }
+
+    public class TurnCommand : ICommand
+    {
+        private string _turningDirection {get; set;}
+        
+        public TurnCommand(string turningDirection)
+        {
+            this._turningDirection = turningDirection;
+        }
+
+        public void Execute(Character c){
+            //switch c.ViewDirection
+        }
     }
 }
