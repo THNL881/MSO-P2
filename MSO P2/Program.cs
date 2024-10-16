@@ -1,4 +1,6 @@
-﻿namespace MSO_P2
+﻿using System.Drawing;
+
+namespace MSO_P2
 {
     internal class Program
     {

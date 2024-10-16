@@ -125,11 +125,5 @@ namespace MSO_P2
         public Preset(List<ICommand> commands){
             _commands = commands;
         }
-
-        public void ExecutePreset(){
-            foreach (ICommand command in _commands){
-                command.Execute();
-            }
-        }
     }
 }
