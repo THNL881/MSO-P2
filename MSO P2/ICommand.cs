@@ -83,13 +83,6 @@ namespace MSO_P2
             _steps = steps;
         }
 
-        private void addX (Point p, int x){
-            p.X += x;
-        }
-        public void addY (Point p, int y){
-            p.Y += y;
-        }
-
         public void Execute(Character c){
             switch (c.direction){
                 case Direction.ViewDir.North:
@@ -131,6 +124,12 @@ namespace MSO_P2
 
         public Preset(List<ICommand> commands){
             _commands = commands;
+        }
+
+        public void ExecutePreset(){
+            foreach (ICommand command in _commands){
+                command.Execute();
+            }
         }
     }
 }

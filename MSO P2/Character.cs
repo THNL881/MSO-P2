@@ -9,8 +9,13 @@ namespace MSO_P2
 {
     public class Character
     {
-        public Direction.ViewDir direction { get; set; }
         public Point position { get; set; }
+        public Direction.ViewDir direction { get; set; }
+
+        public Character(Point position, Direction.ViewDir direction){
+            this.position = position;
+            this.direction = direction;
+        }
 
         private void ExecuteOrder(List<ICommand> commands)
         {
@@ -19,11 +24,6 @@ namespace MSO_P2
                 command.Execute(this);
             }
         }
-
-        public Point getPosition(){
-            return position;
-        }
-
     }
 
     public struct Direction

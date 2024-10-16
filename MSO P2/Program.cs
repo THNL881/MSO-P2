@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Character player = new Character(new Point(0, 0), Direction.ViewDir.East);
         }
     }
 }
