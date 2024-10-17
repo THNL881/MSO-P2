@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MSO P2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ccacf6385e9c9211a2d13f44282a1784c1b27f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98187b67d11df1d67aabc8ba00ade7f91fc2b3a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("MSO P2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MSO P2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

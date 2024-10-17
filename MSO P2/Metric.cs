@@ -26,13 +26,15 @@ namespace MSO_P2
             return returnValue;
         }
 
-        // public static int CalculateNestingLevel(List<ICommand> commands){
-        //     List<int> nestingLevels = new List<int>();
-        //     foreach (ICommand command in commands){
-        //         if (command is RepeatCommand){
-        //             nestingLevels.Add(command.NestingLevel());
-        //         }
-        //     }
-        // }
+        public static int CalculateNestingLevel(List<ICommand> commands, int i = 0){
+            HashSet<int> levels = new HashSet<int>();
+            foreach (ICommand command in commands){
+                if (command is RepeatCommand){
+                    CalculateNestingLevel(((RepeatCommand)command).Commands, ++i);
+                }
+                levels.Add(i);
+            }
+            return levels.Max();
+        }
     }
 }

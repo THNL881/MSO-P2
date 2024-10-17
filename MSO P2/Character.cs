@@ -17,7 +17,7 @@ namespace MSO_P2
             this.direction = direction;
         }
 
-        private void ExecuteOrder(List<ICommand> commands)
+        public void ExecuteOrder(List<ICommand> commands)
         {
             foreach (ICommand command in commands)
             {
@@ -30,7 +30,7 @@ namespace MSO_P2
     {
         public enum ViewDir
         {
-            West, East, North, South
+            North = 0, East = 1, South = 2, West = 3
         }
     }
 }
