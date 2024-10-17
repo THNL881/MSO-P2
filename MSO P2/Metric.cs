@@ -6,13 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
 
 namespace MSO_P2
 {
     public static class Metric 
     {
         public static int CalculateNumberOfCommands(List<ICommand> commands){
-            return commands.Count();
+            int returnValue = 0;
+            foreach(ICommand command in commands)
+            {
+                if(command is RepeatCommand)
+                {
+                    returnValue += CalculateNumberOfCommands(((RepeatCommand)command).Commands);
+                }
+                returnValue++;
+            }
+            return returnValue;
         }
 
         public static int CalculateNumberOfRepeats(List<ICommand> commands){
@@ -30,7 +40,9 @@ namespace MSO_P2
             HashSet<int> levels = new HashSet<int>();
             foreach (ICommand command in commands){
                 if (command is RepeatCommand){
-                    CalculateNestingLevel(((RepeatCommand)command).Commands, ++i);
+                    levels.Add(CalculateNestingLevel(((RepeatCommand)command).Commands, ++i));
+                    i--;
+                    Console.WriteLine(i);
                 }
                 levels.Add(i);
             }

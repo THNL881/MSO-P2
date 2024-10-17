@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.ComponentModel.Design;
 
 namespace MSO_P2;
 
@@ -88,6 +89,11 @@ public class RepeatCommand : ICommand{
 
 public struct Preset {
     private List<ICommand> _commands;
+
+    public List<ICommand> Commands
+    {
+        get { return _commands; }
+    }
 
     public Preset(List<ICommand> commands){
         _commands = commands;

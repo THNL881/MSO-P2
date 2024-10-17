@@ -17,7 +17,6 @@ namespace MSO_P2
                                                 new MoveCommand(1), new TurnCommand("right"), new RepeatCommand([new MoveCommand(2)], 5)
                                                 ], 3)]);
 
-            
         }
     }
 }
