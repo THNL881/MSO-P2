@@ -32,10 +32,8 @@ namespace MSO_P2
         {
             List<ICommand> commands = new List<ICommand>();
 
-            Console.WriteLine("top of readfile");
             if (reader == null)
             {
-                Console.WriteLine("reader is null");
                 return commands;
             }
 
@@ -43,7 +41,6 @@ namespace MSO_P2
 
             while (line != null)
             {
-                Console.WriteLine("inside while loop, line: " + line);
 
                 String[] stringArray = line.Split(" ");
 
@@ -65,17 +62,12 @@ namespace MSO_P2
                 line = reader.ReadLine();
             }
 
-            Console.WriteLine("now at end of readfile, count command: " + commands.Count);
-            foreach (ICommand command in commands)
-            {
-                Console.WriteLine("yeet");
-            }
+            
             return commands;
         }
 
         public List<ICommand> GetRepeatCommands(StreamReader reader)
         {
-            Console.WriteLine("inside RepeatLoop");
             List<ICommand> commands = new List<ICommand>();
             String line = reader.ReadLine();
 
@@ -106,12 +98,9 @@ namespace MSO_P2
                 long currentReaderPosition = reader.BaseStream.Position;
                 if (reader.Peek() == -1)
                 {
-                    Console.WriteLine("nextline is empty, now at command: " +  line);
                     break;
-                } else
-                {
-                    Console.WriteLine("next line not empty, peek gives: " + reader.Peek());
-                }
+                } 
+
                 //check of volgende line indentation heeft, zo ja dan break en list returnen
                 if (reader.ReadLine().Split(" ")[0] != " ")
                 {
@@ -123,8 +112,6 @@ namespace MSO_P2
 
             }
 
-
-            Console.WriteLine("exiting repeat loop, count: " + commands.Count);
             return commands;
         }
     }

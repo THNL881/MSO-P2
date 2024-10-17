@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v3\\MSO P2\\MSO P2.csproj": {}
+    "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v4\\MSO P2\\MSO P2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v3\\MSO P2\\MSO P2.csproj": {
+    "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v4\\MSO P2\\MSO P2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v3\\MSO P2\\MSO P2.csproj",
+        "projectUniqueName": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v4\\MSO P2\\MSO P2.csproj",
         "projectName": "MSO P2",
-        "projectPath": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v3\\MSO P2\\MSO P2.csproj",
+        "projectPath": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v4\\MSO P2\\MSO P2.csproj",
         "packagesPath": "C:\\Users\\Gebruiker\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v3\\MSO P2\\obj\\",
+        "outputPath": "C:\\Users\\Gebruiker\\OneDrive\\reposSchool\\year2\\MSO-P2-v4\\MSO P2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,6 +48,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
