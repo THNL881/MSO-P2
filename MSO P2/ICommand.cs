@@ -13,7 +13,7 @@ namespace MSO_P2
         public void Execute(Character c);
         public int NestingLevel();
     }
-
+    
     public class TurnCommand : ICommand
     {
         private string _turningDirection {get; set;}
