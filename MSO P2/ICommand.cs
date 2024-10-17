@@ -11,6 +11,7 @@ namespace MSO_P2
     public interface ICommand
     {
         public void Execute(Character c);
+        public int NestingLevel();
     }
 
     public class TurnCommand : ICommand
@@ -20,6 +21,10 @@ namespace MSO_P2
         public TurnCommand(string turningDirection)
         {
             this._turningDirection = turningDirection;
+        }
+
+        public int NestingLevel(){
+            return 0;
         }
 
         public void Execute(Character c){
@@ -83,6 +88,10 @@ namespace MSO_P2
             _steps = steps;
         }
 
+        public int NestingLevel(){
+            return 0;
+        }
+
         public void Execute(Character c){
             switch (c.direction){
                 case Direction.ViewDir.North:
@@ -105,9 +114,20 @@ namespace MSO_P2
         private List<ICommand> _commands {get; set;}
         private int _repeatAmount {get; set;}
 
+        public List<ICommand> Commands{
+            get{ return _commands;}
+        }
+        public int RepeatAmount {
+            get {return _repeatAmount;}
+        }
+
         public RepeatCommand(List<ICommand> commands, int repeatAmount){
             _commands = commands;
             _repeatAmount = repeatAmount;
+        }
+
+        public int NestingLevel(){
+            return 1;
         }
 
         public void Execute(Character c){

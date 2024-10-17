@@ -5,21 +5,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MSO_P2
 {
     public static class Metric 
     {
-        private static int CalculateNumberOfCommands(List<ICommand> commands){
+        public static int CalculateNumberOfCommands(List<ICommand> commands){
             return commands.Count();
         }
 
-        private int CalculateNestingLevel(List<ICommand> commands){
-            foreach (ICommand command in commands){
-                //if (command == RepeatCommand){
-
-                //}
+        public static int CalculateNumberOfRepeats(List<ICommand> commands){
+            int returnValue = 0;
+            foreach(ICommand command in commands){
+                if(command is RepeatCommand){
+                    returnValue ++;
+                    returnValue += CalculateNumberOfRepeats(((RepeatCommand)command).Commands);
+                }
             }
+            return returnValue;
         }
+
+        // public static int CalculateNestingLevel(List<ICommand> commands){
+        //     List<int> nestingLevels = new List<int>();
+        //     foreach (ICommand command in commands){
+        //         if (command is RepeatCommand){
+        //             nestingLevels.Add(command.NestingLevel());
+        //         }
+        //     }
+        // }
     }
 }
