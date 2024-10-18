@@ -19,7 +19,10 @@ namespace MSO_P2
             }
         }
 
-
+        public List<ICommand> ReadFile()
+        {
+            return strat.ReadFile();
+        }
 
     }
 }

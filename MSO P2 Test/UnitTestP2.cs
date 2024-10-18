@@ -1,10 +1,12 @@
 using MSO_P2;
 using NuGet.Frameworks;
+using System.Drawing;
 
 namespace MSO_P2_Test
 {
-	public class UnitTestMetric
+	public class UnitTestP2
 	{
+		#region UnitTestMetric
 		#region CalculateNumberOfCommands() Tests
 		[Fact]
 		public void TestNumberCommands_Empty()
@@ -151,6 +153,121 @@ namespace MSO_P2_Test
 
 			Assert.Equal(2, nestingLevel);
 		}
+		#endregion
+		#endregion
+
+		#region UnitTestCommands
+		#region TurnCommand Tests
+		[Fact]
+		public void TestTurnCommand()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.North);
+			TurnCommand test = new TurnCommand("right");
+
+			test.Execute(p1);
+
+			Assert.Equal(Direction.ViewDir.East, p1.direction);
+		}
+
+		[Fact]
+		public void TestTurnCommand_CyclicEnum_NorthToWest()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.North);
+			TurnCommand test = new TurnCommand("left");
+
+			test.Execute(p1);
+
+			Assert.Equal(Direction.ViewDir.West, p1.direction);
+		}
+
+		[Fact]
+		public void TestTurnCommand_CyclicEnum_WestToNorth()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.West);
+			TurnCommand test = new TurnCommand("right");
+
+			test.Execute(p1);
+
+			Assert.Equal(Direction.ViewDir.North, p1.direction);
+		}
+		#endregion
+
+		#region MoveCommand Tests
+		[Fact]
+		public void TestMoveCommand_Upwards()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.North);
+			MoveCommand move = new MoveCommand(10);
+
+			move.Execute(p1);
+
+			Assert.Equal(-10, p1.position.Y);
+
+		}
+
+		[Fact]
+		public void TestMoveCommand_Downwards()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.South);
+			MoveCommand move = new MoveCommand(10);
+
+			move.Execute(p1);
+
+			Assert.Equal(10, p1.position.Y);
+
+		}
+
+		[Fact]
+		public void TestMoveCommand_Right()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.East);
+			MoveCommand move = new MoveCommand(10);
+
+			move.Execute(p1);
+
+			Assert.Equal(10, p1.position.X);
+
+		}
+
+		[Fact]
+		public void TestMoveCommand_Left()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.West);
+			MoveCommand move = new MoveCommand(10);
+
+			move.Execute(p1);
+
+			Assert.Equal(-10, p1.position.X);
+		}
+		#endregion
+
+		#region RepeatCommand Tests
+		[Fact]
+		public void TestRepeatCommand_SimpleTurn()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.North);
+			List<ICommand> commands = [new MoveCommand(10), new TurnCommand("left")];
+
+			RepeatCommand repeat = new RepeatCommand(commands, 2);
+			repeat.Execute(p1);
+
+			Assert.Equal(new Point(-10, -10), p1.position);
+
+		}
+
+		[Fact]
+		public void TestRepeatCommand_NestedRepeat()
+		{
+			Character p1 = new Character(new Point(0, 0), Direction.ViewDir.North);
+			List<ICommand> commands = [new MoveCommand(10), new TurnCommand("left"), new RepeatCommand([new MoveCommand(2)], 3)];
+
+			RepeatCommand repeat = new RepeatCommand(commands, 2);
+			repeat.Execute(p1);
+
+			Assert.Equal(new Point(-16, -4), p1.position);
+			Assert.Equal(Direction.ViewDir.South, p1.direction);
+		}
+		#endregion
 		#endregion
 	}
 }

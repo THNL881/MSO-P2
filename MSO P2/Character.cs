@@ -17,7 +17,7 @@ namespace MSO_P2
             this.direction = direction;
         }
 
-        public void ExecuteOrder(List<ICommand> commands)
+        public void ExecuteCommands(List<ICommand> commands)
         {
             foreach (ICommand command in commands)
             {

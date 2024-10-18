@@ -17,6 +17,11 @@ public interface ICommand
 public class TurnCommand : ICommand
 {
     private string _turningDirection {get; set;}
+
+    public string TurningDirection
+    {
+        get { return _turningDirection; }
+    }
     
     public TurnCommand(string turningDirection)
     {
@@ -39,6 +44,11 @@ public class TurnCommand : ICommand
 
 public class MoveCommand : ICommand{
     private int _steps {get; set;}
+
+    public int Steps
+    {
+        get { return _steps; }
+    }
 
     public MoveCommand(int steps){
         _steps = steps;
