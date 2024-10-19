@@ -42,7 +42,6 @@ namespace MSO_P2
                 if (command is RepeatCommand){
                     levels.Add(CalculateNestingLevel(((RepeatCommand)command).Commands, ++i));
                     i--;
-                    Console.WriteLine(i);
                 }
                 levels.Add(i);
             }
