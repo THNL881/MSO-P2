@@ -85,7 +85,7 @@ namespace MSO_P2
                             return;
                     }
 
-                } else if (option != null && (option == "load file" || option == "Load file" || option == "Load File"))
+                } else if (option != null && (metricsOption == "load file" || metricsOption == "Load file" || metricsOption == "Load File"))
                 {
 					Console.WriteLine("Enter the strategy you want to use and the filepath");
 					Console.WriteLine("Strategies: TXTStrategy");
@@ -113,44 +113,51 @@ namespace MSO_P2
             Console.WriteLine("End state " + player.position.ToString() + " facing " + player.direction);
         }
 
+        //TO BE REWRITTEN
         public static void WriteCommands(List<ICommand> commands, int nestingLevel = 0)
         {
+            string[] printArray = [];
             foreach (ICommand command in commands)
             {
                 if (command is MoveCommand)
                 {
-                    if (command == commands[^1] && nestingLevel == 0)
-                    {
-                        Console.WriteLine($"Move {((MoveCommand)command).Steps}.");
-                    }
-                    else
-                    {
-                        Console.Write($"Move {((MoveCommand)command).Steps}, ");
-                    }
+                    printArray.Append($"Move {((MoveCommand)command).Steps}");
+                    //Console.WriteLine(String.Join(',', $"Move {((MoveCommand)command).Steps}"));
+                    //if (command == commands[^1] && nestingLevel == 0)
+                    //{
+                    //    Console.WriteLine($"Move {((MoveCommand)command).Steps}.");
+                    //}
+                    //else
+                    //{
+                    //    Console.Write($"Move {((MoveCommand)command).Steps}, ");
+                    //}
                 } else if (command is TurnCommand)
 				{
-					if (command == commands[^1] && nestingLevel == 0)
-					{
-						Console.WriteLine($"Turn {((TurnCommand)command).TurningDirection}.");
-					}
-					else
-					{
-						Console.Write($"Turn {((TurnCommand)command).TurningDirection}, ");
-					}
+					printArray.Append($"Turn {((TurnCommand)command).TurningDirection}");
+					//Console.WriteLine(String.Join(',', $"Turn {((TurnCommand)command).TurningDirection}"));
+					//if (command == commands[^1] && nestingLevel == 0)
+					//{
+					//	Console.WriteLine($"Turn {((TurnCommand)command).TurningDirection}.");
+					//}
+					//else
+					//{
+					//	Console.Write($"Turn {((TurnCommand)command).TurningDirection}, ");
+					//}
 				} else if (command is RepeatCommand)
                 {
                     RepeatCommand repeatCommand = (RepeatCommand)command;
+                    bool isInsideRepeat = true;
                     for(int i = 0; i < repeatCommand.RepeatAmount; i++)
                     {
                         if(i == repeatCommand.RepeatAmount - 1)
                         {
-                            nestingLevel--;
+                            isInsideRepeat = false;
                         }
                         WriteCommands(repeatCommand.Commands, nestingLevel + 1);
                     }
                 }
-
 			}
+            Console.WriteLine(String.Join(", ", printArray));
         }
 
     }
