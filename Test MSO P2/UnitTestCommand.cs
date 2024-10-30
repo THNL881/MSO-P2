@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MSO_P2;
 
 namespace Test_MSO_P2
 {
@@ -120,6 +119,64 @@ namespace Test_MSO_P2
 
 			Assert.Equal(new Point(-16, -4), p1.position);
 			Assert.Equal(Direction.ViewDir.South, p1.direction);
+		}
+		#endregion
+
+		#region Condition Tests
+		[Fact]
+		public void WallAhead_PlayerInTopLeftCornerNorth()
+		{
+			Character c = new Character(new Point(0, 0), Direction.ViewDir.North);
+			Grid g = new Grid(c, 4, new List<Point>(), null);
+
+			bool wallInFront = Condition.wallAhead(c, g);
+
+			Assert.True(wallInFront);
+		}
+
+		[Fact]
+		public void WallAhead_PlayerInTopLeftCornerEast()
+		{
+			Character c = new Character(new Point(0, 0), Direction.ViewDir.East);
+			Grid g = new Grid(c, 4, new List<Point>(), null);
+
+			bool wallInFront = Condition.wallAhead(c, g);
+
+			Assert.False(wallInFront);
+		}
+
+		[Fact]
+		public void WallAhead_PlayerInFrontOfBlockedCell()
+		{
+			Character c = new Character(new Point(1, 1), Direction.ViewDir.East);
+			List<Point> blockedCells = new List<Point>() { new Point(2, 1) };
+			Grid g = new Grid(c, 4, blockedCells, null);
+
+			bool wallInFront = Condition.wallAhead(c, g);
+
+			Assert.True(wallInFront);
+		}
+
+		[Fact]
+		public void WallAhead_PlayerInBottomRightCornerSouth()
+		{
+			Character c = new Character(new Point(3, 3), Direction.ViewDir.South);
+			Grid g = new Grid(c, 4, new List<Point>(), null);
+
+			bool wallInFront = Condition.wallAhead(c, g);
+
+			Assert.True(wallInFront);
+		}
+
+		[Fact]
+		public void WallAhead_PlayerInBottomRightCornerWest()
+		{
+			Character c = new Character(new Point(3, 3), Direction.ViewDir.West);
+			Grid g = new Grid(c, 4, new List<Point>(), null);
+
+			bool wallInFront = Condition.wallAhead(c, g);
+
+			Assert.False(wallInFront);
 		}
 		#endregion
 	}

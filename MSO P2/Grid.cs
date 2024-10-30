@@ -7,58 +7,66 @@ using System.Drawing;
 
 namespace MSO_P2
 {
-	internal class Grid
+	public class Grid
 	{
-		private Character character_;
-		private int size_;
-		private List<Point> blockedCells_;
-		private Point endPoint_;
+		private Character _character;
+		private int _size;
+		private List<Point> _blockedCells;
+		private Point? _endPoint;
 
 		public Character Character
 		{
-			get { return character_; }
+			get { return _character; }
+			set 
+			{ 
+				if (value.position.X >= _size || value.position.Y >= _size)
+				{
+					throw new ArgumentOutOfRangeException("Character is outside of the grid");
+				}
+				_character = value;
+			}
 		}
 		public int Size
 		{
-			get { return size_; }
+			get { return _size; }
 		}
 		public List<Point> BlockedCells
 		{
-			get { return blockedCells_; }
+			get { return _blockedCells; }
 		}
-		public Point EndPoint
+		public Point? EndPoint
 		{
-			get { return endPoint_; }
+			get { return _endPoint; }
 		}
 
-		public Grid(Character character, int size, List<Point> blockedCells, Point endPoint)
+		public Grid(Character character, int size, List<Point> blockedCells, Point? endPoint = null)
 		{
-			this.character_ = character;
-			this.size_ = size;
-			this.blockedCells_ = blockedCells;
-			this.endPoint_ = endPoint;
+			Character = character;
+			this._size = size;
+			this._blockedCells = blockedCells;
+			this._endPoint = endPoint;
 		}
 
 		public void setGrid(string input)
 		{
 			string[] gridString = input.Split("\n");
-			size_ = gridString.Length;
-			for (int i = 0; i < size_; i++)
+			_size = gridString.Length;
+			for (int i = 0; i < _size; i++)
 			{
-				for (int j = 0; j < size_; j++)
+				for (int j = 0; j < _size; j++)
 				{
 					switch (gridString[i][j])
 					{
 						case '+':
-							blockedCells_.Add(new Point(j, i));
+							_blockedCells.Add(new Point(j, i));
 							break;
 						case 'x':
-							endPoint_ = new Point(j, i);
+							_endPoint = new Point(j, i);
 							break;
 					}
 				}
 			}
-			character_ = new Character(new Point(0, 0), Direction.ViewDir.East);
+			Character = new Character(new Point(0, 0), Direction.ViewDir.East);
 		}
 
 		public void loadGrid(string filePath)

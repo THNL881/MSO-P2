@@ -97,6 +97,65 @@ public class RepeatCommand : ICommand{
     }
 }
 
+public class RepeatUntilCommand : ICommand
+{
+    private List<ICommand> _commands;
+    private Func<Character, Grid, bool> _condition;
+    public List<ICommand> Commands
+    {
+        get { return _commands; }
+    }
+    public Func<Character, Grid, bool> Condition
+    {
+        get { return _condition;}
+    }
+    public RepeatUntilCommand(List<ICommand> commands, Func<Character, Grid, bool> condition)
+    {
+        this._commands = commands;
+        this._condition = condition;
+    }
+    public void Execute(Character c)
+    {
+        //undefined
+    }
+}
+
+public static class Condition
+{
+    public static bool wallAhead(Character c, Grid g)
+    {
+        switch (c.direction)
+        {
+            case Direction.ViewDir.North:
+                return c.position.Y == 0 || g.BlockedCells.Contains(new Point(c.position.X, c.position.Y - 1));
+            case Direction.ViewDir.East:
+                return c.position.X == (g.Size - 1) || g.BlockedCells.Contains(new Point(c.position.X + 1, c.position.Y));
+            case Direction.ViewDir.South:
+                return c.position.Y == (g.Size - 1) || g.BlockedCells.Contains(new Point(c.position.X, c.position.Y + 1));
+            case Direction.ViewDir.West:
+                return c.position.X == 0 || g.BlockedCells.Contains(new Point(c.position.X - 1, c.position.Y));
+            default:
+                throw new ArgumentException("Character has an invalid direction");
+        }
+    }
+    public static bool gridEdge(Character c, Grid g)
+    {
+		switch (c.direction)
+		{
+			case Direction.ViewDir.North:
+				return c.position.Y == 0;
+			case Direction.ViewDir.East:
+				return c.position.X == (g.Size - 1);
+			case Direction.ViewDir.South:
+				return c.position.Y == (g.Size - 1);
+			case Direction.ViewDir.West:
+				return c.position.X == 0;
+			default:
+				throw new ArgumentException("Character has an invalid direction");
+		}
+	}
+}
+
 public struct Preset {
     private List<ICommand> _commands;
 
